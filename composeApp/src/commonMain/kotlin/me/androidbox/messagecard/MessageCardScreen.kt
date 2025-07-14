@@ -33,7 +33,6 @@ enum class MessageButtonState {
     SENT,
     DELIVERED,
     READ,
-    NONE
 }
 
 @Composable
@@ -41,7 +40,7 @@ fun MessageCardScreen(
     modifier: Modifier = Modifier
 ) {
     var activeButton by rememberSaveable {
-        mutableStateOf(MessageButtonState.NONE)
+        mutableStateOf(MessageButtonState.SENT)
     }
 
     var currentMessageStatusType by rememberSaveable {
@@ -53,7 +52,6 @@ fun MessageCardScreen(
             MessageButtonState.SENT -> MessageStatusType.SENT
             MessageButtonState.DELIVERED -> MessageStatusType.DELIVERED
             MessageButtonState.READ -> MessageStatusType.READ
-            MessageButtonState.NONE -> MessageStatusType.SENT
         }
     }
 
@@ -72,7 +70,7 @@ fun MessageCardScreen(
             Spacer(modifier = Modifier.width(width = 8.dp))
 
             MessageCard(
-                messageStatusType = MessageStatusType.DELIVERED
+                messageStatusType = currentMessageStatusType
             )
         }
 
